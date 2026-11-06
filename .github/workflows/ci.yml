@@ -9,3 +9,11 @@ on:
 jobs: 
     CI:
         runs-on: ubuntu-latest
+        steps:
+            - uses: actions/setup-node@v4
+              with: 
+                  node-version: 22
+            - run: bru run calc --env calc-component
+              working-directory: tests/bruno
+            - if: always()
+              run: docker compose down
